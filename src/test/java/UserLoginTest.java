@@ -26,7 +26,7 @@ public class UserLoginTest {
 
     @After
     public void tearDown() {
-        if (userClient.createUser(user).extract().statusCode() == 200) {
+        if (userClient.loginUser(UserCredentials.from(user)).extract().statusCode() == 200) {
             String accessToken = userClient.getTokenLoginUser(UserCredentials.from(user));
             userClient.deleteUser(accessToken);
         }
