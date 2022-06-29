@@ -9,12 +9,14 @@ import static io.restassured.RestAssured.given;
 
 public class UserClient extends RestAssuredClient {
 
+    private static final String USER_PATH = "auth/";
+
     @Step("Регистрация пользователя")
     public ValidatableResponse createUser(User user) {
         return given()
                 .spec(getBaseSpec())
                 .body(user)
-                .post("auth/register")
+                .post(USER_PATH + "register")
                 .then();
     }
 
@@ -23,7 +25,7 @@ public class UserClient extends RestAssuredClient {
         return given()
                 .spec(getBaseSpec())
                 .body(userCredentials)
-                .post("auth/login")
+                .post(USER_PATH + "login")
                 .then();
     }
 
@@ -32,7 +34,7 @@ public class UserClient extends RestAssuredClient {
         return given()
                 .spec(getBaseSpec())
                 .body(userCredentials)
-                .post("auth/login")
+                .post(USER_PATH + "login")
                 .then().extract().path("accessToken");
     }
 
@@ -42,7 +44,7 @@ public class UserClient extends RestAssuredClient {
                 .spec(getBaseSpec())
                 .headers("Authorization", token)
                 .body(user)
-                .patch("auth/user")
+                .patch(USER_PATH + "user")
                 .then();
     }
 
@@ -51,7 +53,7 @@ public class UserClient extends RestAssuredClient {
         return given()
                 .headers("Authorization", token)
                 .spec(getBaseSpec())
-                .delete("auth/user")
+                .delete(USER_PATH + "user")
                 .then();
     }
 }

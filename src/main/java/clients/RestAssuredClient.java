@@ -6,10 +6,12 @@ import io.restassured.specification.RequestSpecification;
 
 public class RestAssuredClient {
 
+    private static final String BASE_URI = "https://stellarburgers.nomoreparties.site/api/";
+
     public RequestSpecification getBaseSpec() {
         return new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
-                .setBaseUri("https://stellarburgers.nomoreparties.site/api/")
+                .setBaseUri(BASE_URI)
                 .build();
     }
 }

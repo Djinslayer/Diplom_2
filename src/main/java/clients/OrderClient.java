@@ -8,12 +8,14 @@ import static io.restassured.RestAssured.given;
 
 public class OrderClient extends RestAssuredClient {
 
+    private static final String ORDERS_PATH = "/orders";
+
     @Step("Получить заказы конкретного пользователя")
     public ValidatableResponse getUserOrders(String token) {
         return given()
                 .spec(getBaseSpec())
                 .headers("Authorization", token)
-                .get("/orders")
+                .get(ORDERS_PATH)
                 .then();
     }
 
@@ -23,7 +25,7 @@ public class OrderClient extends RestAssuredClient {
                 .spec(getBaseSpec())
                 .headers("Authorization", token)
                 .body(order)
-                .post("/orders")
+                .post(ORDERS_PATH)
                 .then();
     }
 }
